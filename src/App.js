@@ -48,7 +48,7 @@ const Search = ({className, onAction, users}) => {
 
     return (
       <div className={className}>
-        {firstUserDetails && <div onClick={() => onAction(firstUserDetails)} className="py-2  w-auto h-18  border-b border-gray-100 cursor-pointer hover:bg-green-200 hover:shadow-inner text-sm text-gray-700 flex" >
+        {firstUserDetails && <div onClick={() => onAction(firstUserDetails)} className="py-2  w-auto h-auto  border-b border-gray-100 cursor-pointer hover:bg-green-200 hover:shadow-inner text-sm text-gray-700 flex" >
             <span className="flex flex-col md:flex-row gap-4 px-4 h-auto items-start flex-1">
                <img className="" width={60} src={firstUserDetails.avatar_url} alt="github user" />
                <span className="flex flex-col flex-1">
@@ -196,18 +196,15 @@ function AddUsersForm({setUsers}) {
 
   return (
     <div className="w-full h-auto bg-gray-100 border border-gray-200 p-4 pb-8 flex flex-col justify-center shadow-inner">
-      <div style={{minWidth: "16rem"}} className="self-center sm:w-2/3 lg:w-1/2 z-10">
+      <div className="self-center sm:w-2/3 lg:w-1/2 z-10 min-w-full sm:min-w-0">
         <div className="h-6">
           {message && <span className={`text-xs ${isError ? `text-red-400` : `text-green-400`}`}>{message}</span>}
         </div>
-        <form onSubmit={handleSubmit} className="flex w-full overflow-hidden rounded-md">
+        <form onSubmit={handleSubmit} className="flex w-full overflow-hidden rounded-t-md">
           <div className="flex-1">
-            <input onChange={handleSearch} autoComplete="off" spellCheck="false" name="userName" value={username} ref={inputRef} style={{caretColor: `${isError ? `red` : `green`}`}} className={`p-4 w-full text-base font-bold text-gray-700 h-12 border-l border-t border-b border-transparent hover:border-gray-300 focus-within:bg-gray-50 bg-gray-200 hover:bg-gray-300 focus:outline-none shadow-inner rounded-l-md`} type="text" placeholder="Search Github Users" required/>
-            {(result.length > 0) && <Search className="max-h-52 w-full min-w-max  overflow-y-scroll  bg-white border border-gray-100 rounded-b-lg flex flex-col shadow-lg" onAction={handleSearchSelect} users={result} />}
+            <input onChange={handleSearch} autoComplete="off" spellCheck="false" name="userName" value={username} ref={inputRef} style={{caretColor: `${isError ? `red` : `green`}`}} className={`p-4 w-full text-base font-bold text-gray-700 h-12 border-l border-t border-b border-transparent hover:border-gray-300 focus-within:bg-gray-50 bg-gray-200 hover:bg-gray-300 focus:outline-none shadow-inner rounded-t-md`} type="text" placeholder="Search Github Users" required/>
+            {(result.length > 0) && <Search className="max-h-52 w-full min-w-max  overflow-y-scroll  bg-white border border-gray-100 rounded-b-lg flex flex-col" onAction={handleSearchSelect} users={result} />}
           </div>
-          <button className="h-12 w-auto px-8 text-gray-700 text-xs uppercase bg-gray-200 hover:bg-gray-300 border border-gray-300 grid grid-cols-1 grid-rows-1 justify-center items-center gap-4 outline-none focus:outline-none rounded-r-md " type="submit">
-            <span className="col-start-1 row-start-1">Add</span>
-          </button>
         </form>
       </div>
     </div>
@@ -220,15 +217,15 @@ function UsersList({setUsers, users}) {
 
   const getRandomIntro = () => {
     const options = [
-      {id: 1, message:"Search for some friends..🤞"},
-      {id: 2,message: "Search for Search..🌙"},
-      {id: 3, message: "Search for somebody...🤲"},
-      {id: 4, message: "Keep me busy..😴"},
-      {id: 5, message: "Search for yourself..😎"},
-      {id: 6, message: "Search for Google..👑"},
-      {id: 7, message: "Search for Facebook..🔥"},
-      {id: 8, message: "Search for Instagram.. 💥"},
-      {id: 9, message: "I'm feeling bored..😴"},
+      {id: 1, message:"🤞 Search for some friends.."},
+      {id: 2,message: "🌙 Search for Search.."},
+      {id: 3, message: "🤲 Search for somebody.."},
+      {id: 4, message: "😴 Keep me busy.."},
+      {id: 5, message: "😎 Search for yourself.."},
+      {id: 6, message: "👑 Search for Google.."},
+      {id: 7, message: "🔥 Search for Facebook.."},
+      {id: 8, message: "💥 Search for Instagram.."},
+      {id: 9, message: "😴 I'm feeling bored.."},
     ]
 
     const notSoRandomSelection = Math.floor(Math.random() * options.length);
@@ -258,8 +255,8 @@ function UsersList({setUsers, users}) {
           )
           :
           <div className="w-full text-center text-gray-600">
-            <div className="w-64 mx-auto">
-              {intro.id && <div className="w-full shadow-inner p-2 bg-gray-200 typewriter">
+            <div className="min-w-full sm:min-w-0 sm:w-64 mx-auto">
+              {intro.id && <div className="w-full shadow-inner p-2 bg-gray-200 rounded-b-md typewriter">
                 <div key={intro.id} className="typewriter">
                 {intro.message}
                 </div>
