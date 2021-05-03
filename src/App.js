@@ -273,12 +273,14 @@ function UsersList({setUsers, users}) {
 
 function User({id, avatar_url, name, login, company, onAction}) {
   return (
-    <div className="flex gap-2 p-4 w-full md:w-96 md:flex-grow  bg-gray-200 shadow-inner">
-      <img width={150} src={avatar_url} alt="github user"/>
-      <div className="flex-1 flex flex-col">
-        <span className="font-bold text-base text-gray-800">{name}</span>
-        <span className="text-sm text-gray-700">@{login}</span>
-        <span className="text-sm text-gray-700">{company}</span>
+    <div className="flex items-start gap-2 p-4 w-full md:w-96 md:flex-grow  bg-gray-200 shadow-inner">
+      <div className="flex-1 flex flex-col md:flex-row gap-2">
+        <img width={100} src={avatar_url} alt="github user"/>
+        <div className=" flex flex-col">
+          <span className="font-bold text-base text-gray-800">{name}</span>
+          <span className="text-sm text-gray-700">@{login}</span>
+          <span className="text-sm text-gray-700">{company}</span>
+        </div>
       </div>
       <span role="button" onClick={() => onAction(id)} className="p-4 bg-gray-100 h-8 w-8 rounded-full flex justify-center items-center opacity-50 cursor-pointer hover:bg-red-200">x</span>
     </div>
