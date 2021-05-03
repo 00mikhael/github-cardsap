@@ -48,8 +48,8 @@ const Search = ({className, onAction, users}) => {
 
     return (
       <div className={className}>
-        {firstUserDetails && <div onClick={() => onAction(firstUserDetails)} className="py-2  w-auto h-18  border-b border-gray-100 cursor-pointer hover:bg-green-200 hover:shadow-inner text-sm text-gray-700 items-center" >
-            <span className="flex gap-2 px-4 h-20 items-start">
+        {firstUserDetails && <div onClick={() => onAction(firstUserDetails)} className="py-2  w-auto h-18  border-b border-gray-100 cursor-pointer hover:bg-green-200 hover:shadow-inner text-sm text-gray-700 flex" >
+            <span className="flex flex-col md:flex-row gap-4 px-4 h-auto items-start flex-1">
                <img className="" width={60} src={firstUserDetails.avatar_url} alt="github user" />
                <span className="flex flex-col flex-1">
                  <span className="text-sm">{firstUserDetails.name}
@@ -61,12 +61,12 @@ const Search = ({className, onAction, users}) => {
                     {firstUserDetails.company}
                  </span>
                </span>
-               <span className="text-green-500 font-bold ml-1 text-xs">{`+ Add`}</span>
             </span>
+            <span className="text-green-500 font-bold mx-4 text-xs">{`+ Add`}</span>
         </div>}
         {restOfUsers.length > 0 && restOfUsers.map(user => (
            <div onClick={() => onAction(user)} className="py-2  w-auto border-b border-gray-100 cursor-pointer hover:bg-gray-200 hover:shadow-inner text-sm text-gray-700 items-center" key={user.id}>
-             <span className="flex gap-2 h-14 px-4 items-center">
+             <span className="flex gap-4 h-14 px-4 items-center">
                <img className="rounded-full" width={40} src={user.avatar_url} alt="github user" />
                <span className="text-sm text-gray-500">
                   {`@${user.login}`}
