@@ -10,7 +10,7 @@ function App() {
     <div className="p-4 flex flex-col items-center justify-between min-h-screen xl:mx-44">
       <div className="w-full">
         <div className="text-xl text-center mb-4 flex items-center justify-start">
-            <img className="animate-pulse" src={logo} width={50} alt="logo" />
+            <img className="App-logo" src={logo} width={50} alt="logo" />
             <div className="w-auto">
               <div className="">The GitHub Cards App</div>
             </div>
@@ -49,9 +49,9 @@ const Search = ({className, onAction, users}) => {
     return (
       <div className={className}>
         {firstUserDetails && <div onClick={() => onAction(firstUserDetails)} className="py-2  w-auto h-auto  border-b border-gray-100 cursor-pointer hover:bg-green-200 hover:shadow-inner text-sm text-gray-700 flex" >
-            <span className="flex flex-col md:flex-row gap-4 px-4 h-auto items-start flex-1">
+            <span className="flex flex-col md:flex-row px-4 h-auto items-start flex-1">
                <img className="" width={60} src={firstUserDetails.avatar_url} alt="github user" />
-               <span className="flex flex-col flex-1">
+               <span className="flex flex-col flex-1 mt-2 sm:mt-0 sm:mx-2">
                  <span className="text-sm">{firstUserDetails.name}
                  </span>
                  <span className="text-xs text-gray-500">
@@ -66,9 +66,9 @@ const Search = ({className, onAction, users}) => {
         </div>}
         {restOfUsers.length > 0 && restOfUsers.map(user => (
            <div onClick={() => onAction(user)} className="py-2  w-auto border-b border-gray-100 cursor-pointer hover:bg-gray-200 hover:shadow-inner text-sm text-gray-700 items-center" key={user.id}>
-             <span className="flex gap-4 h-14 px-4 items-center">
+             <span className="flex h-14 px-4 items-center">
                <img className="rounded-full" width={40} src={user.avatar_url} alt="github user" />
-               <span className="text-sm text-gray-500">
+               <span className="text-sm text-gray-500 mx-2">
                   {`@${user.login}`}
                </span>
              </span>
@@ -200,10 +200,11 @@ function AddUsersForm({setUsers}) {
         <div className="h-6">
           {message && <span className={`text-xs ${isError ? `text-red-400` : `text-green-400`}`}>{message}</span>}
         </div>
-        <form onSubmit={handleSubmit} className="flex w-full overflow-hidden rounded-t-md">
+        <form onSubmit={handleSubmit} className="flex w-full overflow-hidden">
           <div className="flex-1">
-            <input onChange={handleSearch} autoComplete="off" spellCheck="false" name="userName" value={username} ref={inputRef} style={{caretColor: `${isError ? `red` : `green`}`}} className={`p-4 w-full text-base font-bold text-gray-700 h-12 border-l border-t border-b border-transparent hover:border-gray-300 focus-within:bg-gray-50 bg-gray-200 hover:bg-gray-300 focus:outline-none shadow-inner rounded-t-md`} type="text" placeholder="Search Github Users" required/>
-            {(result.length > 0) && <Search className="max-h-52 w-full min-w-max  overflow-y-scroll  bg-white border border-gray-100 rounded-b-lg flex flex-col" onAction={handleSearchSelect} users={result} />}
+            <input onChange={handleSearch} autoComplete="off" spellCheck="false" name="userName" value={username} ref={inputRef} style={{caretColor: `${isError ? `red` : `green`}`}} className={`p-4 w-full text-base font-semibold text-gray-700 h-12 border bg-gray-200 hover:bg-gray-300 outline-none focus:outline-none
+            rounded-none shadow-inner`} type="text" placeholder="Search..." required/>
+            {(result.length > 0) && <Search className="max-h-52 w-full min-w-max  overflow-y-scroll bg-white border border-gray-100 rounded-b-lg" onAction={handleSearchSelect} users={result} />}
           </div>
         </form>
       </div>
@@ -225,7 +226,7 @@ function UsersList({setUsers, users}) {
       {id: 6, message: "👑 Search for Google.."},
       {id: 7, message: "🔥 Search for Facebook.."},
       {id: 8, message: "💥 Search for Instagram.."},
-      {id: 9, message: "😴 I'm feeling bored.."},
+      {id: 9, message: "😴 I'm bored already.."},
     ]
 
     const notSoRandomSelection = Math.floor(Math.random() * options.length);
@@ -236,7 +237,7 @@ function UsersList({setUsers, users}) {
   useEffect(() => {
     const timer = setInterval(() => {
       setIntro(getRandomIntro())
-    }, 10000);
+    }, 7000);
     return () => {
       clearInterval(timer)
     }
@@ -249,22 +250,24 @@ function UsersList({setUsers, users}) {
   }
 
   return (
-    <span className="mt-4 p-4 h-auto flex flex-wrap-reverse gap-12 justify-start bg-gray-100">
-      {users.length ? users.map(user =>
-            <User key={user.id} {...user} onAction={handleDelete} />
-          )
-          :
-          <div className="w-full text-center text-gray-600">
-            <div className="min-w-full sm:min-w-0 sm:w-64 mx-auto">
-              {intro.id && <div className="w-full shadow-inner p-2 bg-gray-200 rounded-b-md typewriter">
-                <div key={intro.id} className="typewriter">
-                {intro.message}
-                </div>
-              </div>}
+    <div style={{visibility: (intro.id || users.length) ? `visible` : `hidden`}}>
+      <span className="mt-4 p-4 h-auto flex flex-wrap-reverse gap-12 justify-start bg-gray-100">
+        {users.length ? users.map(user =>
+              <User key={user.id} {...user} onAction={handleDelete} />
+            )
+            :
+            <div className="w-full min-h-0 text-center text-gray-600">
+              <div className="min-w-full sm:min-w-0 sm:w-64 mx-auto">
+                {intro.id && <div className="w-full shadow-inner p-2 bg-gray-200 rounded-b-md typewriter">
+                  <div key={intro.id} className="typewriter">
+                  {intro.message}
+                  </div>
+                </div>}
+              </div>
             </div>
-          </div>
-        }
-    </span>
+          }
+      </span>
+    </div>
   )
 }
 
