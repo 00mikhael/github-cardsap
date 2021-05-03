@@ -196,16 +196,16 @@ function AddUsersForm({setUsers}) {
 
   return (
     <div className="w-full h-40 bg-gray-100 border border-gray-200 p-4 flex flex-col shadow-inner">
-      <div className="self-center sm:w-2/3 lg:w-1/2 min-w-max z-10">
+      <div style={{minWidth: "16rem"}} className="self-center sm:w-2/3 lg:w-1/2 z-10">
         <div className="h-6">
           {message && <span className={`text-xs ${isError ? `text-red-400` : `text-green-400`}`}>{message}</span>}
         </div>
         <form onSubmit={handleSubmit} className="flex w-full overflow-hidden rounded-md">
           <div className="flex-1">
-            <input onChange={handleSearch} autoComplete="off" spellCheck="false" name="userName" value={username} ref={inputRef} style={{caretColor: `${isError ? `red` : `green`}`}} className={`p-4 w-full text-sm font-bold text-gray-700 h-12 border-l border-t border-b border-transparent hover:border-gray-300 focus-within:bg-gray-50 bg-gray-200 hover:bg-gray-300 focus:outline-none shadow-inner rounded-l-md`} type="text" placeholder="Search Github Users" required/>
+            <input onChange={handleSearch} autoComplete="off" spellCheck="false" name="userName" value={username} ref={inputRef} style={{caretColor: `${isError ? `red` : `green`}`}} className={`p-4 w-full text-sm font-bold text-gray-700 h-10 border-l border-t border-b border-transparent hover:border-gray-300 focus-within:bg-gray-50 bg-gray-200 hover:bg-gray-300 focus:outline-none shadow-inner rounded-l-md`} type="text" placeholder="Search Github Users" required/>
             {(result.length > 0) && <Search className="max-h-52 w-full min-w-max  overflow-y-scroll  bg-white border border-gray-100 rounded-b-lg flex flex-col shadow-lg" onAction={handleSearchSelect} users={result} />}
           </div>
-          <button className="h-12 w-32 md:w-40 px-4 text-gray-700 text-xs uppercase bg-gray-200 hover:bg-gray-300 border border-gray-300 grid grid-cols-1 grid-rows-1 justify-center items-center gap-4 outline-none focus:outline-none rounded-r-md " type="submit">
+          <button className="h-10 w-32 md:w-40 px-4 text-gray-700 text-xs uppercase bg-gray-200 hover:bg-gray-300 border border-gray-300 grid grid-cols-1 grid-rows-1 justify-center items-center gap-4 outline-none focus:outline-none rounded-r-md " type="submit">
             <span className="col-start-1 row-start-1">Add user</span>
           </button>
         </form>
@@ -257,9 +257,9 @@ function UsersList({setUsers, users}) {
             <User key={user.id} {...user} onAction={handleDelete} />
           )
           :
-          <div style={{minHeight: "60px"}} className="w-full text-center text-gray-600">
-            <div className="w-80 mx-auto">
-              {intro.id && <div className="w-full shadow-inner p-4 bg-gray-200 typewriter">
+          <div className="w-full text-center text-gray-600">
+            <div className="w-64 mx-auto">
+              {intro.id && <div className="w-full shadow-inner p-2 bg-gray-200 typewriter">
                 <div key={intro.id} className="typewriter">
                 {intro.message}
                 </div>
